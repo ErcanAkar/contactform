@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+    <!--Metatags z.B zur Skalierung-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+
+    <!--Seitentitel des Dokuments-->
+    <title>Kontaktformular</title>
+
+    <!--Lädt die chayns styles-->
+    <link rel="stylesheet" href="https://chayns-res.tobit.com/API/V3.1/css/chayns.min.css">
+</head>
+<body>
+    <!--div mit Tapp Klasse-->
+    <div class="tapp">
+        <!--Introbereich-->
+        <div class="tapp__intro">
+            <!--H1 ist die größte Überschrift. Kleinere Überschriften erhalten eine höhere Nummer wie z.B. H2 oder H3-->
+            <h1>Kontaktformular</h1>
+            <!--Ein DIV erstellt ein neuen Bereich. In dem Fall ist dort ein Text enthalten, der einen Abstand von 10 Pixel nach unten hat. 
+                Das Style Element kann dem Inhalt verschiedene Formatierungen geben, wie in diesem Fall die 10 Pixel Abstand nach unten.-->
+            <div style="margin-bottom: 10px;">
+                Geben Sie uns einfach Ihre Kontaktdaten und ein paar kurze Infos und wir werden uns schnellstmöglich mit Ihnen in Verbindung setzen.
+            </div>
+        </div>
+        <!--Inhaltsbereich-->
+        <div class="tapp__content">
+            <!--Die 'content__card' Klasse erstellt ein hervorgehobenen Bereich. Durch die Klasse 'is-dark' ändert sich zusätzlich der Hintergrund des Bereichs.-->
+            <!--Die ID 'content' wird zum bearbeiten des Inhalts benötigt, wenn z.B. der Inhalt durch ein Login ausgetauscht werden muss.-->
+            <div class="content__card is-dark" id="content">
+                <h2>Anfrage</h2>
+                <div>Bitte füllen Sie alle Felder aus.</div>
+                <!--Ein Formelement stellt ein Formular dar und ermöglicht das Prüfen und Absenden des Formulars. Das Attribut 'onsubmit' führt 
+                    eine Funktion beim Absenden des Formulars aus. Wenn hier kein false zurückgegeben wird, wird eine Weiterleitung ausgeführt, 
+                    die bei einem zusätzlichen Attribut 'action' gesetzt werden kann.-->
+                <form id="form" onsubmit="return doAction(this);">
+                    <!--Bereich für Eingabefeld, welches das Eingabefeld und ein Label beinhaltet. Das Label wird hier dynamisch nach rechts verschoben,
+                        sobald eine Eingabe getätigt wird oder eine Eingabe vorliegt. Inputs können dabei verschiedene Typen haben die durch den Browser 
+                        geprüft werden, wenn diese in einem Formular eingeschlossen sind.-->
+                    <div class='input-group'>
+                        <input class='input' type='text' style='width: 100%; margin-bottom: 5px;' required name="name">
+                        <label>Vor- und Nachname</label>
+                    </div>
+                    <div class='input-group'>
+                        <input class='input' type='text' style='width: 100%; margin-bottom: 5px;' required name="address">
+                        <label>Straße und Hausnummer</label>
+                    </div>
+                    <!--Dieser Bereich hat nur eine Breite von 49%. Damit können zwei Elemente auf einer Zeile angezeigt werden. Das Style Attribut float 
+                        beschreibt dabei die Ausrichtung.-->
+                    <div class='input-group' style="width: 49%; float: left;">
+                        <input class='input' type='text' style='width: 100%; margin-bottom: 5px;' required name="zip">
+                        <label>PLZ</label>
+                    </div>
+                    <div class='input-group' style="width: 49%; float: right;">
+                        <input class='input' type='text' style='width: 100%; margin-bottom: 5px;' required name="city">
+                        <label>Stadt</label>
+                    </div>
+                    <!--Das Attribut 'onclick' beschreibt, was beim Klicken auf diesen Bereich geschehen soll und ruft beim Klicken die Methode 'chooseCounty' aus.-->
+                    <div class='input-group' style="clear: both;" onclick="chooseCountry()">
+                        <!--Das Attribut readonly sperrt das Eingabefeld für eigene Angaben. Das ist in diesem Fall hilfreich, damit das Formular optisch gleich aussieht, 
+                            aber hier nur eine Auswahl zwsichen drei Optionen gewählt werden soll.-->
+                        <input class='input' type='text' style='width: 100%; margin-bottom: 5px;' required name="country" readonly value="Deutschland">
+                        <label>Land</label>
+                    </div>
+                    <div class='input-group'>
+                        <input class='input' type='email' style='width: 100%; margin-bottom: 5px;' required name="email">
+                        <label>E-Mailadresse</label>
+                    </div>
+                    <div class='input-group'>
+                        <input class='input' type='tel' style='width: 100%; margin-bottom: 5px;' required name="phone">
+                        <label>Telefonnummer</label>
+                    </div>
+                    <!--Bereich für Radiobuttons. Der name des Inputs muss bei den verschiedenen Radiobuttons identisch sein, damit diese abgewählt werden können, 
+                        sobald ein neues Radiobutton ausgewählt wurde. Die id des Radiobuttons muss sich jedoch unterscheiden und das Label muss in dem Attribut 
+                        'for' den Namen des Radiobuttons beinhalten. Das Attribut 'checked' gibt an, ob ein Radiobutton ausgewählt ist.-->
+                    <div style="margin-top: 10px;">
+                        <input name='concern' type='radio' class='radio' id='radio1'>
+                        <label for='radio1'>Autoversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio2'>
+                        <label for='radio2'>Privat-Haftpflichtversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio3'>
+                        <label for='radio3'>Hausratsversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio4'>
+                        <label for='radio4'>Motorradversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio5'>
+                        <label for='radio5'>Risikolebensversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio6'>
+                        <label for='radio6'>Wohngebäudeversicherung</label>
+                        <br />
+                        <input name='concern' type='radio' class='radio' id='radio7' checked>
+                        <label for='radio7'>Sonstiges Anliegen</label>
+                    </div>
+                    <!--Eine 'Textarea' ist ein mehrzeiliges Eingabefeld. Durch das Attribut 'autogrow' nimmt es automatisch die benötigte höhe an und passt 
+                        sich damit der Länge des Textes an. Der Placeholder ist der Text, der angezeigt wird, wenn kein Text angegeben wurde, ähnlich wie bei 
+                        den Labels bei den einfachen Eingabefeldern.-->
+                    <textarea name="message" class='input' autogrow placeholder='Nachricht' style='width: 100%; margin-top: 10px;'></textarea>
+                    <!--Bereich zum zentrieren des Inhalts. In diesem Fall des Absenden Buttons.-->
+                    <div style="text-align: center; margin-top: 10px;">
+                        <!--Button zum Absenden des Formulars. Durch den Typ 'submit' wird beim Drücken des Buttons, die Funktion im 
+                            Formelementattribut 'onsubmit' ausgeführt.-->
+                        <button type="submit" class="button">Abschicken</button>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Lädt die JavaScript chayns API-->
+    <script src="https://chayns-res.tobit.com/API/V3.1/js/chayns.min.js"></script>
+    <script>
+        //chayns ready promise
+        //Wird ausgeführt sobald chayns® fertig geladen wurde
+        chayns.ready.then(function resolved() {
+            console.log('chayns is ready, environment is loaded');
+
+            //Prüft, ob der Nutzer bereits eingeloggt ist
+            if (!chayns.env.user.isAuthenticated) {
+                //Wenn der Nutzer nicht eingeloggt ist, wird das Formular von einem Text und Button ersetzt, so dass sich die Person einloggen kann
+                document.getElementById('content').innerHTML = '<h4>Um eine Anfrage zu stellen müssen Sie sich zuvor bei uns Anmelden.<h4><div style="text-align: center;"><div class="button" onclick="chayns.login();">Jetzt anmelden</div></div>';
+            }
+
+            //Setzt den Namen schon in das Namensfeld ein
+            document.getElementsByName("name")[0].value = chayns.env.user.name;
+
+            //Prüft, ob ein Parameter übergeben wurde
+            if (chayns.env.parameters.offer !== null && chayns.env.parameters.offer !== undefined) {
+                //Wenn ein Parameter übegeben wurde, wird das entsprechende Radiobutton vorausgewählt
+                switch (chayns.env.parameters.offer) {
+                    case "Autoversicherung": document.getElementById("radio1").checked = true; break;
+                    case "Privat-Haftpflichtversicherung": document.getElementById("radio2").checked = true; break;
+                    case "Hausratversicherung": document.getElementById("radio3").checked = true; break;
+                    case "Motorradversicherung": document.getElementById("radio4").checked = true; break;
+                    case "Risikolebensversicherung": document.getElementById("radio5").checked = true; break;
+                    case "Wohngebaeudeversicherung": document.getElementById("radio6").checked = true; break;
+                }
+            }
+        }).catch(function rejected() {
+            //Wird ausgeführt, wenn die chayns® Umgebung nicht gefunden wurde. Passiert z.B. wenn die Seite geöffnet wird ohne dass diese als Tapp eingebunden wurde.
+            console.log('no chayns environment found');
+        }).then(function always() {
+            //Diese Funktion wird immer ausgeführt, egal ob chayns® erfolgreich geladen wurde oder ein Fehler passiert ist.
+            console.log('Will always be executed');
+        });
+
+        function doAction(form) {
+            //Erstellen einer neuen variablen und initialisieren mit einem leeren Text
+            var message = '';
+
+            //Text der Variable um die Kontaktdaten ergänzen 
+            //+= ergänzen eines Textes, '\n' Zeilenumbruch
+            message += 'Name: ' + document.getElementsByName("name")[0].value + '\n';
+            message += 'Straße: ' + document.getElementsByName("address")[0].value + '\n';
+            message += 'PLZ: ' + document.getElementsByName("zip")[0].value + '\n';
+            message += 'Stadt: ' + document.getElementsByName("city")[0].value + '\n';
+            message += 'Land: ' + document.getElementsByName("country")[0].value + '\n';
+            message += 'E-Mailadresse: ' + document.getElementsByName("email")[0].value + '\n';
+            message += 'Telefonnummer: ' + document.getElementsByName("phone")[0].value + '\n';
+
+            //Text der Variable um das Anliegen ergänzen
+            //Hier wird direkt der Text aus der Funktion 'getConcern' eingesetzt
+            message += 'Anliegen: ' + getConcern() + '\n';
+
+            //Text der Variable um die Nachricht ergänzen
+            message += 'Nachricht: ' + document.getElementsByName("message")[0].value + '\n';
+
+            //Absenden der Intercomnachricht an die chayns® Site
+            chayns.intercom.sendMessageToPage({
+                text: message
+            });
+            chayns.intercom.sendMessageToPage.then(function() {
+                //Austauschen des Formulars durch einen neuen Text
+                document.getElementById('content').innerHTML = '<h4>Danke für Ihre Anfrage. Ein Mitarbeiter wird sich innerhalb von 72 Stunden bei Ihnen melden.</h4>';
+            }).catch(function () {
+                //Ausgeben eines Fehlers, z.B. wenn keine Internetverbindung besteht
+                chayns.dialog.alert('Fehler aufgetreten', 'Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverindung.');
+            });
+
+            //Damit das Dokument hier hält
+            return false;
+        }
+
+        function chooseCountry() {
+            //Anzeigen eines Auswahldialogs
+            chayns.dialog.select({
+                title: 'Auswahl des Landes', // Titel des Dialogs
+                message: 'Bitte wähle ein Land aus:', // Nachricht unterhalb des Titels
+                quickfind: 0, // 0 = keine Suche, 1 = Suche
+                multiselect: 0, // 0 = keine Mehrfachauswahl, 1 = Mehrfachauswahl möglich
+                list: [{ // Liste mit Auswahl
+                    name: 'Deutschland', //Name der angezeigt wird. Zusätzlich kann auch ein Wert mit 'value' übergeben werden
+                    isSelected: true //Wird standardmäßig beim Öffnen des Dialogs vorausgewählt
+                }, {
+                    name: 'Schweiz'
+                }, {
+                    name: 'Österreich'
+                }]
+            }).then(function resolved(data) {
+                if (data.buttonType === 1) { //Überprüft, ob der Button 'Ok' gedrückt wurde. 1 = 'Ok', 0 = 'Abbrechen'
+                    document.getElementsByName("country")[0].value = data.selection[0].name; // Setzt den Namen des gewählten Landes auf das Landfeld ein
+                }
+            });
+        }
+
+        function getConcern() {
+            //Holen aller Radio-Buttons mit dem Elementnamen 'concern'
+            var radioButtons = document.getElementsByName("concern");
+            //Holen aller Beschriftungen mit dem Element 'label'
+            var labels = document.getElementsByTagName('label');
+
+            //Ablaufen aller Radiobuttons zur Bestimmung, ob dieser ausgewählt wurde
+            for (var i = 0; i < radioButtons.length; i++) {
+                //Prüfen, ob der Radiobutton gewählt wurde
+                if (radioButtons[i].checked) {
+                    //Ablaufen aller Labels, um das Label zum Radiobutton zu bestimmen
+                    for (var j = 0; j < labels.length; j++) {
+                        //Prüfen ob der Inhalt des Labels der ID des Radiobuttons entspricht
+                        if (labels[j].outerHTML.indexOf(radioButtons[i].id) > -1) {
+                            //Zurückgeben des Namens des Labels
+                            return labels[j].innerHTML;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
